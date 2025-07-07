@@ -13,4 +13,8 @@ public class TestController {
     public String test2(){
         return "I'm Geo";
     }
+    @GetMapping("/geo")
+    public String test3(){
+        return "GeoKim is Legend";
+    }
 }
