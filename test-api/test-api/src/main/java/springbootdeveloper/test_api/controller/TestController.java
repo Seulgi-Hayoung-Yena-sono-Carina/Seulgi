@@ -1,20 +1,21 @@
 package springbootdeveloper.test_api.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springbootdeveloper.test_api.domain.Member;
+import springbootdeveloper.test_api.Service.TestService;
+
+import java.util.List;
 
 @RestController
 public class TestController {
+    @Autowired
+    TestService testService;
+
     @GetMapping("/test")
-    public String test(){
-        return "Hello, World!";
-    }
-    @GetMapping("")
-    public String test2(){
-        return "I'm Geo";
-    }
-    @GetMapping("/geo")
-    public String test3(){
-        return "GeoKim is Legend";
+    public List<Member> getAllMembers(){
+            List<Member> members = testService.getAllMembers();
+            return members;
     }
 }
