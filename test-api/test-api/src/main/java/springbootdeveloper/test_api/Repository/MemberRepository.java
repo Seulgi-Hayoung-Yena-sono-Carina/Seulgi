@@ -1,4 +1,4 @@
-package springbootdeveloper.test_api.Repository;
+package springbootdeveloper.test_api.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import springbootdeveloper.test_api.domain.Member;
