@@ -1,9 +1,23 @@
 spring:
   application:
-    name: test-api
+    name: blogSummer
+
+  datasource:
+    url: jdbc:h2:mem:test
+    driver-class-name: org.h2.Driver
+    username: geooeg
+    password: geo
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
   jpa:
-    show-sql: true
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
-    defer-datasource-initialization: true
+        show_sql: true
+    database-platform: org.hibernate.dialect.H2Dialect

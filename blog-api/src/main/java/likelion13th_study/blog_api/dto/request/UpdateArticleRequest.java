@@ -5,18 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddArticleRequest {
+@Getter
+public class UpdateArticleRequest {
     private String title;
     private String content;
-
-    public Article toEntity(){
-        return Article.builder()
-                .title(title)
-                .content(content)
-                .build();
-    }
 }
-

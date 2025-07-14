@@ -8,12 +8,8 @@ public class ArticleResponse {
     private final String title;
     private final String content;
 
-    public ArticleResponse(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
-
-    public static ArticleResponse from(Article article) {
-        return new ArticleResponse(article.getTitle(), article.getContent());
+    public ArticleResponse(Article article) {
+        this.title = article.getTitle();
+        this.content = article.getContent();
     }
 }
