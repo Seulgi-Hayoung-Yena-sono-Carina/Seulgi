@@ -3,7 +3,7 @@ package likelion13th_study.blog_api.controller;
 import likelion13th_study.blog_api.domain.Article;
 import likelion13th_study.blog_api.dto.request.AddArticleRequest;
 import likelion13th_study.blog_api.dto.request.UpdateArticleRequest;
-import likelion13th_study.blog_api.dto.response.ArticleResponse;
+import likelion13th_study.blog_api.dto.response.ArticleListViewResponse;
 import likelion13th_study.blog_api.service.BlogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,39 +14,40 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api")
 public class BlogApiController {
     private final BlogService blogService;
 
 
     //ArticleResponse로 불러서 필요 정보만 빼내기
-    @PostMapping("/api/articles")
-    public ResponseEntity<ArticleResponse> addArticle(@RequestBody AddArticleRequest request){
+    @PostMapping("/articles")
+    public ResponseEntity<ArticleListViewResponse> addArticle(@RequestBody AddArticleRequest request){
         Article savedArticle = blogService.save(request);
 
         return ResponseEntity.status(HttpStatus.CREATED) //JSON 파일로 다시 변환
-                .body(new ArticleResponse(savedArticle));
+                .body(new ArticleListViewResponse(savedArticle));
     }
 
     //article 모두 출력하기
-    @GetMapping("/api/articles")
-    public ResponseEntity<List<ArticleResponse>> findAllArticles(){
-        List<ArticleResponse> articles = blogService.findAll()
+    @GetMapping("/articles")
+    public ResponseEntity<List<ArticleListViewResponse>> findAllArticles(){
+        List<ArticleListViewResponse> articles = blogService.findAll()
                 .stream()
-                .map(ArticleResponse::new)
+                .map(ArticleListViewResponse::new)
                 .toList();
         return ResponseEntity.ok()
                 .body(articles);
     }
 
-    @GetMapping("/api/article/{id}")
-    public ResponseEntity<ArticleResponse> findArticle(@PathVariable("id") long id){
+    @GetMapping("/article/{id}")
+    public ResponseEntity<ArticleListViewResponse> findArticle(@PathVariable("id") long id){
         Article article = blogService.findById(id);
 
         return ResponseEntity.ok()
-                .body(new ArticleResponse(article));
+                .body(new ArticleListViewResponse(article));
     }
 
-    @DeleteMapping("/api/articles/{id}")
+    @DeleteMapping("/articles/{id}")
     public ResponseEntity<Void> DeleteArticle(@PathVariable("id") long id){
         blogService.delete(id);
 
@@ -54,7 +55,7 @@ public class BlogApiController {
                 .build();
     }
 
-    @PutMapping("/api/article/{id}")
+    @PutMapping("/article/{id}")
     public ResponseEntity<Article> updateArticle(@PathVariable("id") Long id, @RequestBody UpdateArticleRequest request){
         Article updatedArticle = blogService.update(id, request);
 
