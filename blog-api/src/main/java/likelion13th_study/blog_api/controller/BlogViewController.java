@@ -46,6 +46,6 @@ public class BlogViewController {
             model.addAttribute("article",new ArticleViewResponse(article));
         }
 
-        return "newArticle";
+        return "newArticle";      //newArticle.html로 반환하겠습니다
     }
 }
