@@ -3,6 +3,7 @@ package likelion13th_study.blog_api.service;
 import jakarta.transaction.Transactional;
 import likelion13th_study.blog_api.domain.Article;
 import likelion13th_study.blog_api.dto.request.AddArticleRequest;
+import likelion13th_study.blog_api.dto.request.PatchArticleRequest;
 import likelion13th_study.blog_api.dto.request.UpdateArticleRequest;
 import likelion13th_study.blog_api.repository.BlogRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,14 @@ public class BlogService {
 
         article.update(request.getTitle(),request.getContent());
 
+        return article;
+    }
+
+    public Article patch(Long id, PatchArticleRequest request) {
+        Article article = blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+
+        article.patch(request.getTitle(), request.getContent());
         return article;
     }
 

@@ -2,6 +2,7 @@ package likelion13th_study.blog_api.controller;
 
 import likelion13th_study.blog_api.domain.Article;
 import likelion13th_study.blog_api.dto.request.AddArticleRequest;
+import likelion13th_study.blog_api.dto.request.PatchArticleRequest;
 import likelion13th_study.blog_api.dto.request.UpdateArticleRequest;
 import likelion13th_study.blog_api.dto.response.ArticleListViewResponse;
 import likelion13th_study.blog_api.service.BlogService;
@@ -62,6 +63,16 @@ public class BlogApiController {
         return ResponseEntity.ok()
                 .body(updatedArticle);
     }
+
+    @PatchMapping("/article/{id}")
+    public ResponseEntity<Article> patchArticle(
+            @PathVariable("id") Long id,
+            @RequestBody PatchArticleRequest request) {
+
+        Article patchedArticle = blogService.patch(id, request);
+        return ResponseEntity.ok(patchedArticle);
+    }
+
 //    Article을 그대로 부르기
 //    @PostMapping("/api/articles")
 //    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request){

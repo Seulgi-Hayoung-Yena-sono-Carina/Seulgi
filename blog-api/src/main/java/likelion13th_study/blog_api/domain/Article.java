@@ -47,4 +47,13 @@ public class Article { //여기서 Article은 type이다
         this.title = title;
         this.content = content;
     }
+
+    public void patch(String title, String content) {
+        if (title != null) {
+            this.title = title;
+        }
+        if (content != null) {
+            this.content = content;
+        }
+    }
 }
